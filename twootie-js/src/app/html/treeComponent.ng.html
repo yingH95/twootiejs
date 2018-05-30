@@ -1,0 +1,22 @@
+<li>
+    <a [ngClass]="{selectedBranch: problem.selectedBranch === branchId}" (click)="problem.selectBranch(branchId)">
+        <h3 *ngIf="branchId !== 0">Branch: {{branchId}}</h3>
+        <div *ngFor="let problemSentence of problem.getBranchFromId(branchId).problemSentences">
+            <a [ngClass]="{checkedOff: problemSentence.checkedOff}">{{problemSentence.lineNumber}}.</a>
+            <a>{{problemSentence.sentence.toString()}}</a>
+            <a>{{problemSentence.justification}}</a>
+        </div>
+        <div *ngIf="problem.getBranchFromId(branchId).closed">
+            <a>X</a>
+        </div>
+        <div class="errorText">{{problem.getBranchFromId(branchId).errorText}}</div>
+        <justification-input *ngIf="!problem.completed &&
+                                    !problem.branchHasChild(branchId) &&
+                                    !problem.getBranchFromId(branchId).closed"
+                    [problem]="problem" [branchId]="branchId"></justification-input>
+    </a>
+    <ul *ngIf="problem.branchHasChild(branchId)">
+        <tree *ngFor="let childBranchId of problem.getChildBranches(branchId)"
+              [problem]="problem" [branchId]="childBranchId"></tree>
+    </ul>
+</li>

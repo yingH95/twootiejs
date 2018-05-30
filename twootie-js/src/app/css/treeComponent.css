@@ -1,0 +1,104 @@
+.tree ul {
+    padding-top: 20px;
+    position: relative;
+
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+}
+
+.tree tree {
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: top;
+    margin: 0 -2px 0 -2px;
+    text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+}
+
+.tree tree::before, .tree tree::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 50%;
+    border-top: 1px solid #ccc;
+    width: 50%;
+    height: 20px;
+}
+.tree tree::after {
+    right: auto;
+    left: 50%;
+    border-left: 1px solid #ccc;
+}
+
+.tree tree:only-child::after, .tree tree:only-child::before {
+    display: none;
+}
+
+.tree tree:only-child {
+    padding-top: 0;
+}
+
+.tree tree:first-child::before, .tree tree:last-child::after {
+    border: 0 none;
+}
+
+.tree tree:last-child::before {
+    border-right: 1px solid #ccc;
+    border-radius: 0 5px 0 0;
+    -webkit-border-radius: 0 5px 0 0;
+    -moz-border-radius: 0 5px 0 0;
+}
+
+.tree tree:first-child::after {
+    border-radius: 5px 0 0 0;
+    -webkit-border-radius: 5px 0 0 0;
+    -moz-border-radius: 5px 0 0 0;
+}
+
+.tree ul ul::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    border-left: 1px solid #ccc;
+    width: 0; height: 20px;
+}
+
+.tree tree a {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #666;
+    background-color: white;
+    font-size: 11px;
+    display: inline-block;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+}
+
+.tree tree a .checkedOff {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.tree tree .selectedBranch {
+    background-color: #626360;
+    color: white;
+}
+.errorText {
+    color: red;
+}
+
+.tree {
+    margin-top: -16px;
+}
