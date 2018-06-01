@@ -68,7 +68,7 @@ var ProblemSentence = (function () {
         }
     };
     ProblemSentence.prototype.copy = function () {
-        return new ProblemSentence(this._lineNumber, this._sentence.copy(), this._justification, this._branchId);
+        return new ProblemSentence(this._lineNumber, this._sentence, this._justification, this._branchId);
     };
     return ProblemSentence;
 }());

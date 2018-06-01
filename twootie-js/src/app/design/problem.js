@@ -13,6 +13,7 @@ var Problem = (function () {
         this.branchChildrenMap = new Map();
         this._maxBranchId = -1;
         this._completed = false;
+        this.probId = 0;
         this.setStartingBranch();
     }
     Object.defineProperty(Problem.prototype, "startingBranchSentences", {
@@ -41,6 +42,9 @@ var Problem = (function () {
             var justification = parser_1.parseStringToJustification(justificationStr);
             decomposer_1.Decomposer.decompose(this, branchId, justification);
         }
+    };
+    Problem.prototype.setProbId = function (pid) {
+        this.probId = pid;
     };
     Problem.prototype.addChildBranch = function (parentId, problemSentences) {
         var branchId = this._maxBranchId + 1;

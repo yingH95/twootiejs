@@ -1,5 +1,5 @@
 .tree ul {
-    padding-top: 20px;
+    padding-top: inherit;
     position: relative;
 
     transition: all 0.5s;
@@ -100,5 +100,5 @@
 }
 
 .tree {
-    margin-top: -16px;
+    margin-top: 5%;
 }

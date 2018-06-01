@@ -1,3 +1,19 @@
+.header-bar li:hover > ul {
+    display: block;
+    position: absolute;
+    z-index: 1;
+}
+
+.header-bar li ul li a {  background: #f1f1f1; z-index: 2 }
+
+.header-bar ul li a:hover { background: #3e8e41; }
+
+.header-bar li:hover li { float: none; }
+
+.header-bar li:hover a { background: #3e8e41; }
+
+.header-bar li:hover li a:hover { background: #a0a29d; z-index: 3 }
+
 .header-bar ul {
     list-style: none;
     padding: 0;
@@ -26,21 +42,6 @@
     color: black;
 }
 
-.header-bar ul li a:hover { background: #3e8e41; }
-
-.header-bar li:hover > ul {
-    display: block;
-    position: absolute;
-}
-
-.header-bar li:hover li { float: none; }
-
-.header-bar li:hover a { background: #3e8e41; }
-
-.header-bar li ul li a { background: #f9f9f9; }
-
-.header-bar li:hover li a:hover { background: #f1f1f1 }
-
 .header-bar  li ul li { border-top: 0; }
 
 .header-bar ul ul ul {
@@ -58,5 +59,4 @@
 
 .header-bar, .header-bar li, .header-bar ul, .header-bar a {
     opacity:100;
-    z-index: 1;
 }

@@ -1,4 +1,5 @@
 <li>
+    <h2 *ngIf="branchId === 0" style="margin: auto">Problem #{{problem.probId}}</h2>
     <a [ngClass]="{selectedBranch: problem.selectedBranch === branchId}" (click)="problem.selectBranch(branchId)">
         <h3 *ngIf="branchId !== 0">Branch: {{branchId}}</h3>
         <div *ngFor="let problemSentence of problem.getBranchFromId(branchId).problemSentences">

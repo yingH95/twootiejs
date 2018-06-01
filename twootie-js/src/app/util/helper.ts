@@ -2,6 +2,9 @@ import {Problem} from "../design/problem";
 import {parseStringToSentence, parseStringToJustification} from "./parser";
 import {ProblemSentence} from "../design/problemSentence";
 import {SimpleSentence} from "../design/simpleSentence";
+import {ProblemSet} from "./problemSet";
+
+let probSet = new ProblemSet();
 
 export function createMockProblem(): Problem {
     return new Problem([
@@ -27,50 +30,51 @@ export function createEmptyProblem(): Problem {
     return new Problem([]);
 }
 
+function parseProblemSentence(newProblemObj: any): ProblemSentence[] {
+    let newSentenceArr: ProblemSentence[] = [];
+    if (typeof newProblemObj.sentences !== 'undefined') {
+        for (let sentence of newProblemObj.sentences) {
+            let s = new ProblemSentence(
+                sentence.line,
+                parseStringToSentence(sentence.sen),
+                parseStringToJustification(sentence.just),
+                sentence.br
+            );
+            newSentenceArr.push(s);
+        }
+    }
+    return newSentenceArr;
+}
+
 export function createSLProblem(): Problem {
-    return new Problem([
-        new ProblemSentence(
-            1,
-            parseStringToSentence("((D&K)&J)"),
-            parseStringToJustification("/SM"),
-            0
-        ),
-        new ProblemSentence(
-            2,
-            parseStringToSentence("(L&P)"),
-            parseStringToJustification("/SM"),
-            0
-        ),
-        new ProblemSentence(
-            3,
-            parseStringToSentence("-(K&L)"),
-            parseStringToJustification("/SM"),
-            0
-        )
-    ]);
+    let pid = 1;
+    let newProblemObj: any = probSet.getSlProbId(pid);
+    let newSentenceArr: ProblemSentence[] = parseProblemSentence(newProblemObj);
+    let problem = new Problem(newSentenceArr);
+    problem.setProbId(pid);
+    return problem;
 }
 
 export function createPLProblem(): Problem {
-    return new Problem([
-        new ProblemSentence(
-            1,
-            parseStringToSentence("Vx(Gxa>Lxa)"),
-            parseStringToJustification("/SM"),
-            0
-        ),
-        new ProblemSentence(
-            2,
-            parseStringToSentence("Gca"),
-            parseStringToJustification("/SM"),
-            0
-        ),
-        new ProblemSentence(
-            3,
-            parseStringToSentence("-Lca"),
-            parseStringToJustification("/SM"),
-            0
-        )
-    ]);
+    let pid = 1;
+    let newProblemObj: any = probSet.getPlProbId(pid);
+    let newSentenceArr: ProblemSentence[] = parseProblemSentence(newProblemObj);
+    let problem = new Problem(newSentenceArr);
+    problem.setProbId(pid);
+    return problem;
+}
+
+export function getNextPLProblem(lastPid: number): Problem {
+    let nextPid = lastPid + 1;
+    let newProblemObj: any;
+    if (!probSet.hasProbWithId(nextPid, "PL")){
+        nextPid = 1;
+    }
+    newProblemObj = probSet.getPlProbId(nextPid);
+    let newSentenceArr = parseProblemSentence(newProblemObj);
+    let nextProb = new Problem(newSentenceArr);
+    nextProb.setProbId(nextPid);
+    return nextProb;
 }
 
 export function noSentenceConflicts(simpleSentences: Array<SimpleSentence>): boolean {

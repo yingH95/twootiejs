@@ -55,7 +55,7 @@ export class ProblemSentence {
     public copy(): ProblemSentence {
         return new ProblemSentence(
             this._lineNumber,
-            this._sentence.copy(),
+            this._sentence,
             this._justification,
             this._branchId
         )

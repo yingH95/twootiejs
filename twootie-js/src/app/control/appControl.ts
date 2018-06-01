@@ -2,7 +2,8 @@ import {Sentence} from '../design/sentence';
 import {Problem} from '../design/problem';
 import {isPresent} from '../util/commonFunctions';
 import {parseStringToSentence} from '../util/parser';
-import {createEmptyProblem, createSLProblem, createPLProblem} from '../util/helper';
+import {createEmptyProblem, createSLProblem,
+    createPLProblem, getNextPLProblem} from '../util/helper';
 import {isUndefined} from "util";
 
 export class AppControl {
@@ -31,6 +32,11 @@ export class AppControl {
 
     public loadPLProblem(): void {
         this.currentProblem = createPLProblem();
+    }
+
+    public loadNextPLProblem(): void {
+        let thisPid = this.currentProblem.probId;
+        this.currentProblem = getNextPLProblem(thisPid);
     }
 
     private hasSelectedBranch(): boolean {

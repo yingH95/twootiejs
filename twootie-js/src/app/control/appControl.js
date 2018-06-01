@@ -22,6 +22,10 @@ var AppControl = (function () {
     AppControl.prototype.loadPLProblem = function () {
         this.currentProblem = helper_1.createPLProblem();
     };
+    AppControl.prototype.loadNextPLProblem = function () {
+        var thisPid = this.currentProblem.probId;
+        this.currentProblem = helper_1.getNextPLProblem(thisPid);
+    };
     AppControl.prototype.hasSelectedBranch = function () {
         return (typeof this.currentProblem.selectedBranch !== 'undefined')
             && (null !== this.currentProblem.selectedBranch);

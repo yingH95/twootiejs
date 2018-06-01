@@ -15,6 +15,7 @@ export class Problem {
     private _maxBranchId: number = -1;
     private _completed: boolean = false;
     public selectedBranch: number | null;
+    public probId: number = 0;
 
     constructor(
         private _startingBranchSentences: Array<ProblemSentence>
@@ -40,6 +41,10 @@ export class Problem {
             let justification: Justification = parseStringToJustification(justificationStr);
             Decomposer.decompose(this, branchId, justification);
         }
+    }
+
+    public setProbId(pid: number): void {
+        this.probId = pid;
     }
 
     public addChildBranch(parentId: number,
