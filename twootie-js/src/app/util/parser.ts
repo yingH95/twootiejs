@@ -43,6 +43,10 @@ export function parseStringToSentence(str: string, freeVars: Array<string> = [])
                 let negatedGroups: RegExpExecArray = negatedRegex.exec(str);
                 numNegated = negatedGroups[1].length;
                 str = stripBrackets(str.slice(numNegated));
+            } else if (!(new RegExp(OPERATOR_REGEX).test(str))){
+                let negatedGroups: RegExpExecArray = negatedRegex.exec(str);
+                numNegated = negatedGroups[1].length;
+                str = stripBrackets(str.slice(numNegated));
             }
         }
     }

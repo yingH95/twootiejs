@@ -42,6 +42,11 @@ function parseStringToSentence(str, freeVars) {
                 numNegated = negatedGroups[1].length;
                 str = commonFunctions_1.stripBrackets(str.slice(numNegated));
             }
+            else if (!(new RegExp(exports.OPERATOR_REGEX).test(str))) {
+                var negatedGroups = negatedRegex.exec(str);
+                numNegated = negatedGroups[1].length;
+                str = commonFunctions_1.stripBrackets(str.slice(numNegated));
+            }
         }
     }
     // simple sentence
