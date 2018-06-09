@@ -39,7 +39,7 @@ export function parseStringToSentence(str: string, freeVars: Array<string> = [])
     let negatedRegex: RegExp = new RegExp(BEGINNING_REGEX + "([-~¬]+).*");
     if (str !== null && !(typeof str === 'undefined')){
         if (negatedRegex.test(str)) {
-            if (str.length === 2 || !str[1].match(/[a-z]/i)){
+            if (!str[1].match(/[a-z]/i)){
                 let negatedGroups: RegExpExecArray = negatedRegex.exec(str);
                 numNegated = negatedGroups[1].length;
                 str = stripBrackets(str.slice(numNegated));

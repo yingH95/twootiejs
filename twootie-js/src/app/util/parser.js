@@ -37,7 +37,7 @@ function parseStringToSentence(str, freeVars) {
     var negatedRegex = new RegExp(exports.BEGINNING_REGEX + "([-~¬]+).*");
     if (str !== null && !(typeof str === 'undefined')) {
         if (negatedRegex.test(str)) {
-            if (str.length === 2 || !str[1].match(/[a-z]/i)) {
+            if (!str[1].match(/[a-z]/i)) {
                 var negatedGroups = negatedRegex.exec(str);
                 numNegated = negatedGroups[1].length;
                 str = commonFunctions_1.stripBrackets(str.slice(numNegated));
