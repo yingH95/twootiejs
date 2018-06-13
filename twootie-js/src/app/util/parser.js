@@ -35,10 +35,19 @@ function parseStringToSentence(str, freeVars) {
     // check whether it is negated
     var numNegated = 0;
     var negatedRegex = new RegExp(exports.BEGINNING_REGEX + "([-~¬]+).*");
-    if (negatedRegex.test(str)) {
-        var negatedGroups = negatedRegex.exec(str);
-        numNegated = negatedGroups[1].length;
-        str = commonFunctions_1.stripBrackets(str.slice(numNegated));
+    if (str !== null && !(typeof str === 'undefined')) {
+        if (negatedRegex.test(str)) {
+            if (!str[1].match(/[a-z]/i)) {
+                var negatedGroups = negatedRegex.exec(str);
+                numNegated = negatedGroups[1].length;
+                str = commonFunctions_1.stripBrackets(str.slice(numNegated));
+            }
+            else if (!(new RegExp(exports.OPERATOR_REGEX).test(str))) {
+                var negatedGroups = negatedRegex.exec(str);
+                numNegated = negatedGroups[1].length;
+                str = commonFunctions_1.stripBrackets(str.slice(numNegated));
+            }
+        }
     }
     // simple sentence
     var atomicFormulaRegex = new RegExp(exports.BEGINNING_REGEX + exports.ATOMIC_REGEX + exports.ENDING_REGEX);

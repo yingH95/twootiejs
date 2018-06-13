@@ -27,7 +27,6 @@ export function parseStringToSentence(str: string, freeVars: Array<string> = [])
     if (!isPresent(str)) {
         return SimpleSentence.createDefault();
     }
-
     str = stripBrackets(str.replace(/\s+/g, ""));
 
     if (new RegExp("[V\\]][" + freeVars.join("") + "]").test(str)) {
@@ -38,10 +37,18 @@ export function parseStringToSentence(str: string, freeVars: Array<string> = [])
     // check whether it is negated
     let numNegated: number = 0;
     let negatedRegex: RegExp = new RegExp(BEGINNING_REGEX + "([-~¬]+).*");
-    if (negatedRegex.test(str)) {
-        let negatedGroups: RegExpExecArray = negatedRegex.exec(str);
-        numNegated = negatedGroups[1].length;
-        str = stripBrackets(str.slice(numNegated));
+    if (str !== null && !(typeof str === 'undefined')){
+        if (negatedRegex.test(str)) {
+            if (!str[1].match(/[a-z]/i)){
+                let negatedGroups: RegExpExecArray = negatedRegex.exec(str);
+                numNegated = negatedGroups[1].length;
+                str = stripBrackets(str.slice(numNegated));
+            } else if (!(new RegExp(OPERATOR_REGEX).test(str))){
+                let negatedGroups: RegExpExecArray = negatedRegex.exec(str);
+                numNegated = negatedGroups[1].length;
+                str = stripBrackets(str.slice(numNegated));
+            }
+        }
     }
 
     // simple sentence
@@ -117,7 +124,6 @@ export function parseStringToJustification(str: string): Justification {
     );
     if (smRegex.test(str)) {
         let justificationGroups: RegExpExecArray = smRegex.exec(str);
-
         let userResult: string = justificationGroups[1] || "";
         let userSentence: Sentence = parseStringToSentence(stripBrackets(userResult));
         if (userSentence.type !== SentenceType.simpleSentence ||
