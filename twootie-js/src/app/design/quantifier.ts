@@ -5,9 +5,9 @@ export enum Quantifier {
 export function quantifierToString(quantifier: Quantifier): string {
     switch(quantifier) {
         case Quantifier.universal:
-            return "V";
+            return "∀";
         case Quantifier.existential:
-            return "]";
+            return "∃";
     }
 }
 

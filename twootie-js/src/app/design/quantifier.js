@@ -8,9 +8,9 @@ var Quantifier;
 function quantifierToString(quantifier) {
     switch (quantifier) {
         case Quantifier.universal:
-            return "V";
+            return "∀";
         case Quantifier.existential:
-            return "]";
+            return "∃";
     }
 }
 exports.quantifierToString = quantifierToString;
